@@ -52,7 +52,7 @@ function UserPage() {
             <h1 className="md:text-2xl text-xl mt-4 mb-2 tracking-widest">
               {userData.userFirstName} {userData.userLastName}
             </h1>
-            <span className="tracking-wide">{userData.bio}</span>
+            <span className="tracking-wide">{userData.userBio}</span>
           </div>
           <div className="flex flex-col justify-center items-center sm:w-1/2 tracking-wide w-full">
             {typeof userData.userLinks !== "undefined" ? (
@@ -60,7 +60,7 @@ function UserPage() {
                 <div
                   key={index}
                   className="py-4 px-6 text-lg text-center shadow-lg rounded-2xl mb-6 w-full"
-                  style={{ backgroundColor: userData.linksBgColor }}
+                  style={{ backgroundColor: userData.linkBgColor }}
                 >
                   <a
                     href={link.linkURL}
