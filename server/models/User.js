@@ -42,8 +42,10 @@ const User = db.define("User", {
   },
 
   bio: {
-    type: DataTypes.STRING(300),
+    type: DataTypes.STRING(500),
     allowNull: true,
+    required: false,
+    defaultValue: "",
   },
 
   bgColor: {
