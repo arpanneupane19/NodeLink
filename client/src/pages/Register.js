@@ -62,11 +62,14 @@ function Register() {
       <Navbar />
       <div className="flex flex-col justify-center items-center md:mt-16 mt-12 mx-6">
         <div className="form w-full md:w-1/2">
-          <div className="heading tracking-wider mb-10">
+          <div className="tracking-wider mb-10">
             {alreadyExists ? (
               <>
                 <h1 className="md:text-3xl text-2xl mb-2">Register for Free</h1>
-                <span>Username or email already exists.</span>
+                <span>
+                  Username or email already exists. Please choose a different
+                  one.
+                </span>
               </>
             ) : (
               <h1 className="md:text-3xl text-2xl">Register for Free</h1>
