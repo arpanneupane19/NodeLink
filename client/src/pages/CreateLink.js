@@ -66,7 +66,7 @@ function CreateLink() {
       <LoggedInNavbar />
       <div className="flex flex-col justify-center items-center md:mt-16 mt-12 mx-6">
         <div className="form w-full md:w-1/2">
-          <div className="heading tracking-wider mb-10">
+          <div className="tracking-wider mb-10">
             <h1 className="md:text-3xl text-2xl mb-2">Create Link</h1>
           </div>
           <form onSubmit={sendPostReq}>
