@@ -8,7 +8,7 @@ function NotFound() {
       {localStorage.getItem("token") ? <LoggedInNavbar /> : <Navbar />}
       <div className="flex flex-col justify-center items-center text-center md:mt-16 mt-12 mx-4">
         <div className="form w-full md:w-1/2">
-          <div className="heading tracking-wider mb-10">
+          <div className="tracking-wider mb-10">
             <h1 className="md:text-3xl text-2xl mb-2">404</h1>
             <p>
               Oops! The page your looking for may have been removed or does not
