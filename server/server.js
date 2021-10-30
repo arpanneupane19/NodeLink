@@ -56,14 +56,14 @@ app.post("/edit-link/:linkId", verifyJWT, routes.postEditLink);
 app.post("/delete-link/:linkId", verifyJWT, routes.deleteLink);
 app.get("/analytics", verifyJWT, routes.getAnalytics);
 app.get("/account", verifyJWT, routes.getAccountSettings);
-// app.post("/account", verifyJWT, routes.postAccountSettings);
-// app.get("/change-password", loginRequired, routes.getChangePassword);
-// app.post("/change-password", loginRequired, routes.postChangePassword);
-// app.get("/edit-site", loginRequired, routes.getEditSite);
-// app.post("/edit-site", loginRequired, routes.postEditSite);
+app.post("/account", verifyJWT, routes.postAccountSettings);
+app.get("/edit-site", verifyJWT, routes.getEditSite);
+app.post("/edit-site", verifyJWT, routes.postEditSite);
+// app.get("/change-password", verifyJWT, routes.getChangePassword);
+// app.post("/change-password", verifyJWT, routes.postChangePassword);
 app.get("/:username", routes.getUserProfile);
 
-const PORT = 5000 || process.env.PORT;
+const PORT = process.env.PORT;
 
 db.sync({ alter: true }).then(() => {
   app.listen(PORT, () => {
