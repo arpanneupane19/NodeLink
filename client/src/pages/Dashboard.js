@@ -58,6 +58,7 @@ function Dashboard() {
         if (response.data.notFound === "404 not found") {
           setNotFound(true);
         }
+        setLinkDeleted(false);
       });
   };
 
@@ -79,7 +80,7 @@ function Dashboard() {
       <LoggedInNavbar />
       <div className="flex flex-col md:mt-16 mt-12 md:mx-6 mx-4">
         <div className="flex flex-col md:mx-6 mx-4">
-          <div className="heading mb-8 flex flex-col md:mx-6 mx-4">
+          <div className="mb-8 flex flex-col md:mx-6 mx-4">
             <h1 className="text-2xl mb-2 tracking-widest">DASHBOARD</h1>
             <div>
               {currentUser !== "undefined" ? (
