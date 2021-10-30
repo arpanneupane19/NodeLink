@@ -245,7 +245,174 @@ async function getAnalytics(req, res) {
 }
 
 async function getAccountSettings(req, res) {
-  res.json({ message: "Logged in" });
+  const token = req.headers["x-access-token"];
+  let currentUserId = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token." });
+      } else {
+        return decodedValue.id;
+      }
+    }
+  );
+
+  const user = await User.findOne({ where: { id: currentUserId } });
+  if (user) {
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+    const username = user.username;
+    const email = user.email;
+    const bio = user.bio;
+    res.json({
+      message: "Logged in",
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      bio: bio,
+    });
+  }
+}
+
+async function postAccountSettings(req, res) {
+  const token = req.headers["x-access-token"];
+  const firstName = req.body.data.firstName;
+  const lastName = req.body.data.lastName;
+  const username = req.body.data.username;
+  const email = req.body.data.email;
+  const bio = req.body.data.bio;
+  let usernameValid = false;
+  let emailValid = false;
+
+  let currentUserId = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token." });
+      } else {
+        return decodedValue.id;
+      }
+    }
+  );
+
+  const user = await User.findOne({ where: { id: currentUserId } });
+
+  if (user) {
+    if (user.username !== username) {
+      const exists = await User.findOne({ where: { username: username } });
+      if (exists) {
+        usernameValid = false;
+      }
+      if (!exists) {
+        usernameValid = true;
+      }
+    } else {
+      usernameValid = true;
+    }
+
+    if (user.email !== email) {
+      const exists = await User.findOne({ where: { email: email } });
+      if (exists) {
+        emailValid = false;
+      }
+      if (!exists) {
+        emailValid = true;
+      }
+    } else {
+      emailValid = true;
+    }
+
+    if (emailValid && usernameValid) {
+      await user.update({
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        bio: bio,
+      });
+      res.json({ message: "Logged in", accountUpdated: true });
+    }
+
+    if (!usernameValid || !emailValid) {
+      res.json({
+        message: "Logged in",
+        accountUpdated: false,
+        error: "Username or email belongs to another user.",
+      });
+    }
+  }
+}
+
+async function getChangePassword(req, res) {}
+
+async function getEditSite(req, res) {
+  const token = req.headers["x-access-token"];
+
+  let currentUserId = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token." });
+      } else {
+        return decodedValue.id;
+      }
+    }
+  );
+
+  const user = await User.findOne({ where: { id: currentUserId } });
+
+  if (user) {
+    const bgColor = user.bgColor;
+    const linkBgColor = user.linkBgColor;
+    const linkColor = user.linkColor;
+    const textColor = user.textColor;
+    res.json({
+      message: "Logged in",
+      siteConfig: {
+        bgColor: bgColor,
+        linkBgColor: linkBgColor,
+        linkColor: linkColor,
+        textColor: textColor,
+      },
+    });
+  }
+}
+
+async function postEditSite(req, res) {
+  const token = req.headers["x-access-token"];
+
+  let currentUserId = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token." });
+      } else {
+        return decodedValue.id;
+      }
+    }
+  );
+
+  const user = await User.findOne({ where: { id: currentUserId } });
+  if (user) {
+    const bgColor = req.body.siteConfig.bgColor;
+    const linkBgColor = req.body.siteConfig.linkBgColor;
+    const linkColor = req.body.siteConfig.linkColor;
+    const textColor = req.body.siteConfig.textColor;
+
+    await user.update({
+      bgColor: bgColor,
+      linkBgColor: linkBgColor,
+      linkColor: linkColor,
+      textColor: textColor,
+    });
+
+    res.json({ message: "Logged in", siteUpdated: true });
+  }
 }
 
 async function getUserProfile(req, res) {
@@ -285,5 +452,8 @@ module.exports = {
   deleteLink: deleteLink,
   getAnalytics: getAnalytics,
   getAccountSettings: getAccountSettings,
+  postAccountSettings: postAccountSettings,
+  getEditSite: getEditSite,
+  postEditSite: postEditSite,
   getUserProfile: getUserProfile,
 };
