@@ -15,7 +15,7 @@ function CreateLink() {
 
   useEffect(() => {
     axios
-      .get(`/edit-link/${linkId}`, {
+      .get(`/api/edit-link/${linkId}`, {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -53,7 +53,7 @@ function CreateLink() {
 
     axios
       .post(
-        `/edit-link/${linkId}`,
+        `/api/edit-link/${linkId}`,
         { link },
         {
           headers: {
