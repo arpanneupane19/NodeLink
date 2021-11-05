@@ -15,7 +15,7 @@ function Account() {
 
   useEffect(() => {
     axios
-      .get("/account", {
+      .get("/api/account", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -66,7 +66,7 @@ function Account() {
 
     axios
       .post(
-        "/account",
+        "/api/account",
         { data },
         {
           headers: {
