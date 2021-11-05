@@ -14,7 +14,7 @@ function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("/dashboard", {
+      .get("/api/dashboard", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -36,7 +36,7 @@ function Dashboard() {
     const token = localStorage.getItem("token");
     axios
       .post(
-        `/delete-link/${linkId}`,
+        `/api/delete-link/${linkId}`,
         { linkId },
         {
           headers: {
