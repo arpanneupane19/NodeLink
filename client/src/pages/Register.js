@@ -31,7 +31,7 @@ function Register() {
       password: password,
     };
 
-    axios.post("/register", { user }).then((response) => {
+    axios.post("/api/register", { user }).then((response) => {
       if (response.data.message === "User account created") {
         setRedirectToLogin(true);
       }
