@@ -346,7 +346,46 @@ async function postAccountSettings(req, res) {
   }
 }
 
-async function getChangePassword(req, res) {}
+async function getChangePassword(req, res) {
+  res.json({ message: "Logged in" });
+}
+
+async function postChangePassword(req, res) {
+  const token = req.headers["x-access-token"];
+  const currentPassword = req.body.data.currentPassword;
+  const newPassword = req.body.data.newPassword;
+
+  let currentUserId = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token" });
+      } else {
+        return decodedValue.id;
+      }
+    }
+  );
+
+  const user = await User.findOne({ where: { id: currentUserId } });
+  if (user) {
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (passwordMatch) {
+      bcrypt.hash(newPassword, 12, async (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        user.update({ password: hash });
+        res.json({ message: "Logged in", passwordUpdated: true });
+      });
+    }
+
+    if (!passwordMatch) {
+      res.json({ message: "Logged in", passwordUpdated: false });
+    }
+  }
+}
 
 async function getEditSite(req, res) {
   const token = req.headers["x-access-token"];
@@ -453,6 +492,8 @@ module.exports = {
   getAnalytics: getAnalytics,
   getAccountSettings: getAccountSettings,
   postAccountSettings: postAccountSettings,
+  getChangePassword: getChangePassword,
+  postChangePassword: postChangePassword,
   getEditSite: getEditSite,
   postEditSite: postEditSite,
   getUserProfile: getUserProfile,
