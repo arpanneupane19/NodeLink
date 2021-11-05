@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import CreateLink from "./pages/CreateLink";
 import Analytics from "./pages/Analytics";
 import Account from "./pages/Account";
+import ChangePassword from "./pages/ChangePassword";
 import EditSite from "./pages/EditSite";
 import EditLink from "./pages/EditLink";
 import UserProfile from "./pages/UserProfile";
@@ -50,6 +51,10 @@ function App() {
 
         <Route exact path="/account">
           <Account />
+        </Route>
+
+        <Route exact path="/change-password">
+          <ChangePassword />
         </Route>
 
         <Route exact path="/edit-site">
