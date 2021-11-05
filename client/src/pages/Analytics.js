@@ -9,7 +9,7 @@ function Analytics() {
 
   useEffect(() => {
     axios
-      .get("/analytics", {
+      .get("/api/analytics", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
