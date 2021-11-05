@@ -13,7 +13,7 @@ function EditSite() {
 
   useEffect(() => {
     axios
-      .get("/edit-site", {
+      .get("/api/edit-site", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -49,7 +49,7 @@ function EditSite() {
 
     axios
       .post(
-        "/edit-site",
+        "/api/edit-site",
         { siteConfig },
         {
           headers: {
