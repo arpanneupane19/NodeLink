@@ -45,23 +45,23 @@ const { verifyJWT } = require("./middlewares/middlewares.js");
 
 const routes = require("./routes/routes.js");
 
-app.post("/register", routes.postRegister);
-app.post("/login", routes.postLogin);
-app.get("/logout", routes.logout);
-app.get("/dashboard", verifyJWT, routes.getDashboard);
-app.get("/create-link", verifyJWT, routes.getCreateLink);
-app.post("/create-link", verifyJWT, routes.postCreateLink);
-app.get("/edit-link/:linkId", verifyJWT, routes.getEditLink);
-app.post("/edit-link/:linkId", verifyJWT, routes.postEditLink);
-app.post("/delete-link/:linkId", verifyJWT, routes.deleteLink);
-app.get("/analytics", verifyJWT, routes.getAnalytics);
-app.get("/account", verifyJWT, routes.getAccountSettings);
-app.post("/account", verifyJWT, routes.postAccountSettings);
-app.get("/edit-site", verifyJWT, routes.getEditSite);
-app.post("/edit-site", verifyJWT, routes.postEditSite);
-// app.get("/change-password", verifyJWT, routes.getChangePassword);
-// app.post("/change-password", verifyJWT, routes.postChangePassword);
-app.get("/:username", routes.getUserProfile);
+app.post("/api/register", routes.postRegister);
+app.post("/api/login", routes.postLogin);
+app.get("/api/logout", routes.logout);
+app.get("/api/dashboard", verifyJWT, routes.getDashboard);
+app.get("/api/create-link", verifyJWT, routes.getCreateLink);
+app.post("/api/create-link", verifyJWT, routes.postCreateLink);
+app.get("/api/edit-link/:linkId", verifyJWT, routes.getEditLink);
+app.post("/api/edit-link/:linkId", verifyJWT, routes.postEditLink);
+app.post("/api/delete-link/:linkId", verifyJWT, routes.deleteLink);
+app.get("/api/analytics", verifyJWT, routes.getAnalytics);
+app.get("/api/account", verifyJWT, routes.getAccountSettings);
+app.post("/api/account", verifyJWT, routes.postAccountSettings);
+app.get("/api/edit-site", verifyJWT, routes.getEditSite);
+app.post("/api/edit-site", verifyJWT, routes.postEditSite);
+app.get("/api/change-password", verifyJWT, routes.getChangePassword);
+app.post("/api/change-password", verifyJWT, routes.postChangePassword);
+app.get("/api/:username", routes.getUserProfile);
 
 const PORT = process.env.PORT;
 
