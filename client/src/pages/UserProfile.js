@@ -10,7 +10,7 @@ function UserPage() {
 
   useEffect(() => {
     axios
-      .get(`/${username}`, {
+      .get(`/api/${username}`, {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
