@@ -23,7 +23,7 @@ function Login() {
       password: password,
     };
 
-    axios.post("/login", { user }).then((response) => {
+    axios.post("/api/login", { user }).then((response) => {
       if (response.data.message === "Verification successful") {
         // Log user in
         localStorage.setItem("token", response.data.token);
