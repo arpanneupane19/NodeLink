@@ -1,9 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import demo from "./assets/demo.png";
 import { Navbar } from "../components/Navbar";
 
 function Home() {
+  const [token, setToken] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(true);
+    }
+  }, []);
+
+  if (token) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <div className="font-sans antialiased bg-white">
       <Navbar />
