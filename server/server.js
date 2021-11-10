@@ -31,7 +31,7 @@ Link.belongsTo(User, {
 // Middlewares
 app.use(
   session({
-    secret: "1b15dc2f6bd549a483caaccdb5186f36",
+    secret: process.env.APP_SECRET_KEY,
     cookie: { maxAge: 1000 * 3600 * 24 * 7 },
     resave: false,
     saveUninitialized: false,
@@ -61,6 +61,9 @@ app.get("/api/edit-site", verifyJWT, routes.getEditSite);
 app.post("/api/edit-site", verifyJWT, routes.postEditSite);
 app.get("/api/change-password", verifyJWT, routes.getChangePassword);
 app.post("/api/change-password", verifyJWT, routes.postChangePassword);
+app.post("/api/forgot-password", routes.postForgotPassword);
+app.get("/api/reset-password/:token", routes.getResetPassword);
+app.post("/api/reset-password/:token", routes.postResetPassword);
 app.get("/api/:username", routes.getUserProfile);
 
 const PORT = process.env.PORT;
