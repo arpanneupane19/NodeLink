@@ -3,6 +3,7 @@ const User = require("../models/User.js");
 const Link = require("../models/Link.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 async function postRegister(req, res) {
   const firstName = req.body.user.firstName;
@@ -387,6 +388,102 @@ async function postChangePassword(req, res) {
   }
 }
 
+async function postForgotPassword(req, res) {
+  const email = req.body.data.email;
+  const urlOrigin = req.body.data.frontendURL;
+
+  const user = await User.findOne({ where: { email: email } });
+  if (user) {
+    const payload = {
+      email: user.email,
+    };
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "15m" },
+      (err, token) => {
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.PASSWORD_RESET_EMAIL,
+            pass: process.env.PASSWORD_RESET_PASSWORD,
+          },
+        });
+        const mailOptions = {
+          from: "noreply@nodelink.com",
+          to: user.email,
+          subject: "NodeLink Password Reset",
+          text: `Hello, this is an email regarding your NodeLink account. \n Your email was used to recently request a password reset for your NodeLink account. \n In order to reset your password, please visit this link: ${urlOrigin}/reset-password/${token} \n If you did not make this request, you may ignore this email.`,
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+          }
+        });
+      }
+    );
+    res.json({ userValid: true });
+  }
+  if (!user) {
+    res.json({ userValid: false });
+  }
+}
+
+async function getResetPassword(req, res) {
+  const token = req.params.token;
+
+  let userEmail = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token." });
+      } else {
+        return decodedValue.email;
+      }
+    }
+  );
+
+  if (userEmail !== undefined) {
+    const user = await User.findOne({ where: { email: userEmail } });
+    if (user) {
+      res.json({ message: "User valid", userEmail: user.email });
+    }
+  }
+}
+
+async function postResetPassword(req, res) {
+  const token = req.params.token;
+  let userEmail = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token." });
+      } else {
+        return decodedValue.email;
+      }
+    }
+  );
+  if (userEmail !== undefined) {
+    const user = await User.findOne({ where: { email: userEmail } });
+    const newPassword = req.body.data.newPassword;
+    if (user) {
+      bcrypt.hash(newPassword, 12, async (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        await user.update({
+          password: hash,
+        });
+        res.json({ passwordUpdated: true });
+      });
+    }
+  }
+}
+
 async function getEditSite(req, res) {
   const token = req.headers["x-access-token"];
 
@@ -494,6 +591,9 @@ module.exports = {
   postAccountSettings: postAccountSettings,
   getChangePassword: getChangePassword,
   postChangePassword: postChangePassword,
+  postForgotPassword: postForgotPassword,
+  getResetPassword: getResetPassword,
+  postResetPassword: postResetPassword,
   getEditSite: getEditSite,
   postEditSite: postEditSite,
   getUserProfile: getUserProfile,
