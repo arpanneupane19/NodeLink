@@ -82,8 +82,8 @@ function Register() {
                 min="4"
                 max="20"
                 placeholder="First Name"
-                name="username"
-                id="username"
+                name="first-name"
+                id="first-name"
                 onChange={(e) => setFirstName(e.target.value)}
                 value={firstName}
                 className="w-1/2 mr-1 p-4 border border-gray-100 bg-gray-100 rounded-xl focus:border-gray-100 focus:outline-none focus:bg-white tracking-wide mb-4"
@@ -94,8 +94,8 @@ function Register() {
                 min="4"
                 max="30"
                 placeholder="Last Name"
-                name="username"
-                id="username"
+                name="last-name"
+                id="last-name"
                 onChange={(e) => setLastName(e.target.value)}
                 value={lastName}
                 className="w-1/2 ml-1 p-4 border border-gray-100 bg-gray-100 rounded-xl focus:border-gray-100 focus:outline-none focus:bg-white tracking-wide mb-4"
