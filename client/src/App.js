@@ -8,6 +8,8 @@ import CreateLink from "./pages/CreateLink";
 import Analytics from "./pages/Analytics";
 import Account from "./pages/Account";
 import ChangePassword from "./pages/ChangePassword";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import EditSite from "./pages/EditSite";
 import EditLink from "./pages/EditLink";
 import UserProfile from "./pages/UserProfile";
@@ -19,11 +21,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route
-          exact
-          path={["/", "/home"]}
-          component={localStorage.getItem("token") ? Dashboard : Home}
-        ></Route>
+        <Route exact path={["/", "/home"]}>
+          <Home />
+        </Route>
 
         <Route exact path={["/register", "/sign-up"]}>
           <Register />
@@ -55,6 +55,14 @@ function App() {
 
         <Route exact path="/change-password">
           <ChangePassword />
+        </Route>
+
+        <Route exact path="/forgot-password">
+          <ForgotPassword />
+        </Route>
+
+        <Route exact path="/reset-password/:token">
+          <ResetPassword />
         </Route>
 
         <Route exact path="/edit-site">
