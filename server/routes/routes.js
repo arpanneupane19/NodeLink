@@ -554,9 +554,35 @@ async function postEditSite(req, res) {
 async function getUserProfile(req, res) {
   const username = req.params.username;
   const user = await User.findOne({ where: { username: username } });
-
+  const token = req.headers["x-access-token"];
   if (user) {
     const links = await Link.findAll({ where: { linkOwnerId: user.id } });
+    if (token !== "null") {
+      let userId = jwt.verify(
+        token,
+        process.env.JWT_SECRET_KEY,
+        (err, decodedValue) => {
+          if (err) {
+            console.log("Invalid token");
+          } else {
+            return decodedValue.id;
+          }
+        }
+      );
+
+      if (userId !== user.id) {
+        let views = user.views;
+        views++;
+        await user.update({ views: views });
+      }
+    }
+
+    if (token === "null") {
+      let views = user.views;
+      views++;
+      await user.update({ views: views });
+    }
+
     res.send({
       message: "User found",
       userData: {
