@@ -7,9 +7,9 @@ function Account() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
-  const [email, setEmail] = useState("");
   const [alreadyExists, setAlreadyExists] = useState(false);
   const [accountUpdated, setAccountUpdated] = useState(false);
 
@@ -183,6 +183,16 @@ function Account() {
               style={{ minHeight: "90px" }}
             ></textarea>
             <div className="flex flex-col items-start mb-4">
+              <span>
+                Want to update your profile picture? Click{" "}
+                <Link
+                  to="/update-profile-picture"
+                  className="underline hover:no-underline"
+                >
+                  here
+                </Link>
+                .
+              </span>
               <span>
                 Want to change your password? Click{" "}
                 <Link
