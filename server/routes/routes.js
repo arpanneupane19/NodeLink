@@ -4,6 +4,17 @@ const Link = require("../models/Link.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const { v4: uuidv4 } = require("uuid");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "." + file.originalname.split(".").pop());
+  },
+});
+const upload = multer({ storage: storage }).single("file");
 
 async function postRegister(req, res) {
   const firstName = req.body.user.firstName;
@@ -347,6 +358,24 @@ async function postAccountSettings(req, res) {
   }
 }
 
+async function getUpdateProfilePic(req, res) {
+  res.json({ message: "Logged in" });
+}
+
+async function postUpdateProfilePic(req, res) {
+  upload(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      res.json({ message: "Logged in", statusResponse: "An error occured." });
+    } else if (err) {
+      res.json({ message: "Logged in", statusResponse: "An error occured." });
+    }
+    res.json({
+      message: "Logged in",
+      statusResponse: "Image uploaded successfully!",
+    });
+  });
+}
+
 async function getChangePassword(req, res) {
   res.json({ message: "Logged in" });
 }
@@ -615,6 +644,8 @@ module.exports = {
   getAnalytics: getAnalytics,
   getAccountSettings: getAccountSettings,
   postAccountSettings: postAccountSettings,
+  getUpdateProfilePic: getUpdateProfilePic,
+  postUpdateProfilePic: postUpdateProfilePic,
   getChangePassword: getChangePassword,
   postChangePassword: postChangePassword,
   postForgotPassword: postForgotPassword,
