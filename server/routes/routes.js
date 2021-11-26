@@ -363,12 +363,26 @@ async function getUpdateProfilePic(req, res) {
 }
 
 async function postUpdateProfilePic(req, res) {
-  upload(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      res.json({ message: "Logged in", statusResponse: "An error occured." });
-    } else if (err) {
-      res.json({ message: "Logged in", statusResponse: "An error occured." });
+  const token = req.headers["x-access-token"];
+  let currentUserId = jwt.verify(
+    token,
+    process.env.JWT_SECRET_KEY,
+    (err, decodedValue) => {
+      if (err) {
+        res.json({ message: "Invalid token" });
+      } else {
+        return decodedValue.id;
+      }
     }
+  );
+  const user = await User.findOne({ where: { id: currentUserId } });
+  upload(req, res, async (err) => {
+    if (err instanceof multer.MulterError) {
+      res.json({ message: "Logged in", statusResponse: "An error occurred." });
+    } else if (err) {
+      res.json({ message: "Logged in", statusResponse: "An error occurred." });
+    }
+    await user.update({ profileImg: req.file.filename });
     res.json({
       message: "Logged in",
       statusResponse: "Image uploaded successfully!",
