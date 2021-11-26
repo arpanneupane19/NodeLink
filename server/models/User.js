@@ -48,6 +48,13 @@ const User = db.define("User", {
     defaultValue: "",
   },
 
+  profileImg: {
+    type: DataTypes.STRING(),
+    allowNull: false,
+    required: true,
+    defaultValue: "default.png",
+  },
+
   bgColor: {
     type: DataTypes.STRING(),
     defaultValue: "#f2f2f2",
