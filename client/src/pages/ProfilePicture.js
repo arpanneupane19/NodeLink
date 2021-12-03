@@ -44,7 +44,7 @@ function ProfilePicture() {
         }
 
         if (response.data.statusResponse !== "Image uploaded successfully!") {
-          setProfilePicResponse("An error occured. Please try again later.");
+          setProfilePicResponse("An error occurred. Please try again later.");
         } else {
           setProfilePicResponse(
             "Your profile picture has been uploaded successfully!"
