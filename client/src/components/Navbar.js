@@ -10,7 +10,7 @@ export function Navbar() {
           <p>NodeLink</p>
         </Link>
       </div>
-      <ul className="flex flex-center md:mt-0 mt-3 md:text-lg text-base">
+      <ul className="flex flex-center md:mt-0 mt-3 md:text-lg sm:text-base text-sm">
         <Link to="/login" className="mx-3 p-2">
           Login
         </Link>
@@ -47,24 +47,24 @@ export function LoggedInNavbar() {
           <p>NodeLink</p>
         </Link>
       </div>
-      <ul className="flex flex-center md:mt-0 mt-3 md:text-lg text-base">
-        <Link to="/dashboard" className="mx-3 p-2">
+      <ul className="flex flex-center md:mt-0 mt-3 md:text-lg sm:text-base text-sm">
+        <Link to="/dashboard" className="p-2">
           Dashboard
         </Link>
-        <Link to="/create-link" className="mx-3 p-2">
-          Create Link
+        <Link to="/create-link" className="ml-1 p-2">
+          Create
         </Link>
-        <Link to="/analytics" className="mx-3 p-2">
+        <Link to="/analytics" className="ml-1 p-2">
           Analytics
         </Link>
-        <Link to="/account" className="mx-3 p-2">
+        <Link to="/account" className="ml-1 p-2">
           Account
         </Link>
         <button
-          className="mx-3 bg-green-500 p-2 rounded-xl text-white hover:bg-green-600"
+          className="ml-2 bg-green-500 p-2 rounded-xl text-white hover:bg-green-600"
           onClick={() => logout()}
         >
-          Log out
+          Logout
         </button>
       </ul>
     </nav>
