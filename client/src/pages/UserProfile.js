@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, useParams } from "react-router-dom";
-import defaultProfilePic from "./assets/default.png";
 import axios from "axios";
 
 function UserPage() {
@@ -27,6 +26,8 @@ function UserPage() {
       });
   }, [username]);
 
+  const url = `/api/get-profile-picture/${username}`;
+
   if (doesUserExist === false) {
     return <Redirect to="/404-page-not-found" />;
   }
@@ -43,12 +44,7 @@ function UserPage() {
       >
         <div className="flex flex-col justify-center items-center pt-12 mx-6">
           <div className="flex flex-col justify-center items-center mb-12">
-            <img
-              src={defaultProfilePic}
-              alt="Profile"
-              className="rounded-full"
-              width="100"
-            />
+            <img src={url} alt="Profile" className="rounded-full" width="100" />
             <h1 className="md:text-2xl text-xl mt-4 mb-2 tracking-widest">
               {userData.userFirstName} {userData.userLastName}
             </h1>

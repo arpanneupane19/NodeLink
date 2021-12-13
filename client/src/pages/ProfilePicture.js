@@ -64,9 +64,9 @@ function ProfilePicture() {
             <p>{profilePicResponse}</p>
             {profilePicResponse ===
             "Your profile picture has been uploaded successfully!" ? (
-              <Link to="/account" className="text-blue-500">
+              <a href="/account" className="text-blue-500">
                 Back to my account
-              </Link>
+              </a>
             ) : (
               <></>
             )}

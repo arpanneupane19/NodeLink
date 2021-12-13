@@ -20,7 +20,7 @@ function Home() {
       <Navbar />
       <div className="flex flex-col justify-center items-center md:mt-24 mt-12">
         <div className="text-center tracking-widest mb-12">
-          <h1 className="md:text-4xl text-3xl mb-2">
+          <h1 className="md:text-4xl text-2xl mb-2">
             One Link That Does It All
           </h1>
           <span className="text-gray-600">
@@ -51,7 +51,7 @@ function Home() {
             width="300"
             className="mb-10"
           />
-          <div className="border border-green-400 p-4 rounded-3xl text-center">
+          <div className="border border-green-400 md:p-4 p-3 sm:text-base text-sm rounded-3xl text-center">
             nodelink.herokuapp.com/
             <span className="text-gray-600">yourNameHere</span>
           </div>

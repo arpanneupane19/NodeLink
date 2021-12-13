@@ -24,23 +24,25 @@ function Account() {
         if (response.data.message !== "Logged in") {
           setLoggedIn(false);
         }
-        if (
-          response.data.firstName &&
-          response.data.lastName &&
-          response.data.username &&
-          response.data.email
-        ) {
-          setFirstName(response.data.firstName);
-          setLastName(response.data.lastName);
-          setUsername(response.data.username);
-          setEmail(response.data.email);
-        }
+        if (response.data.message === "Logged in") {
+          if (
+            response.data.firstName &&
+            response.data.lastName &&
+            response.data.username &&
+            response.data.email
+          ) {
+            setFirstName(response.data.firstName);
+            setLastName(response.data.lastName);
+            setUsername(response.data.username);
+            setEmail(response.data.email);
+          }
 
-        if (response.data.bio.trim() === "") {
-          setBio("");
-        }
-        if (response.data.bio.trim() !== "") {
-          setBio(response.data.bio);
+          if (response.data.bio.trim() === "") {
+            setBio("");
+          }
+          if (response.data.bio.trim() !== "") {
+            setBio(response.data.bio);
+          }
         }
       });
   }, []);
@@ -93,13 +95,21 @@ function Account() {
       });
   };
 
+  const url = `/api/get-profile-picture/${username}`;
+
   return (
     <div className="font-sans antialiased bg-white">
       <LoggedInNavbar />
       <div className="flex flex-col justify-center items-center md:mt-16 mt-12 mx-6">
         <div className="form md:w-3/4 w-full">
-          <div className="tracking-wider mb-10">
+          <div className="tracking-wider mb-6">
             <h1 className="text-2xl tracking-widest mb-2">My Account</h1>
+            <img
+              src={url}
+              alt="Profile"
+              className="rounded-full mt-4"
+              width="100"
+            />
             {alreadyExists ? (
               <>
                 <span>
