@@ -6,6 +6,10 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
+const sharp = require("sharp");
+const fs = require("fs");
+const path = require("path");
+const { profile } = require("console");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -382,12 +386,37 @@ async function postUpdateProfilePic(req, res) {
     } else if (err) {
       res.json({ message: "Logged in", statusResponse: "An error occurred." });
     }
-    await user.update({ profileImg: req.file.filename });
+
+    let newFileName =
+      (await uuidv4()) + "." + req.file.filename.split(".").pop();
+    await sharp(req.file.path)
+      .resize(200, 200)
+      .toFile(`uploads/${newFileName}`);
+
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        throw err;
+      }
+      console.log("Updated successfully!");
+    });
+
+    await user.update({ profileImg: newFileName });
     res.json({
       message: "Logged in",
       statusResponse: "Image uploaded successfully!",
     });
   });
+}
+
+async function returnProfilePic(req, res) {
+  const username = req.params.username;
+
+  const user = await User.findOne({ where: { username: username } });
+
+  if (user) {
+    const profilePicture = user.profileImg;
+    res.sendFile(path.resolve(`uploads/${profilePicture}`));
+  }
 }
 
 async function getChangePassword(req, res) {
@@ -660,6 +689,7 @@ module.exports = {
   postAccountSettings: postAccountSettings,
   getUpdateProfilePic: getUpdateProfilePic,
   postUpdateProfilePic: postUpdateProfilePic,
+  returnProfilePic: returnProfilePic,
   getChangePassword: getChangePassword,
   postChangePassword: postChangePassword,
   postForgotPassword: postForgotPassword,

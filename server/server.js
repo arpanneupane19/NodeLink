@@ -64,6 +64,7 @@ app.get("/api/account", verifyJWT, routes.getAccountSettings);
 app.post("/api/account", verifyJWT, routes.postAccountSettings);
 app.get("/api/update-profile-picture", verifyJWT, routes.getUpdateProfilePic);
 app.post("/api/update-profile-picture", verifyJWT, routes.postUpdateProfilePic);
+app.get("/api/get-profile-picture/:username", routes.returnProfilePic);
 app.get("/api/change-password", verifyJWT, routes.getChangePassword);
 app.post("/api/change-password", verifyJWT, routes.postChangePassword);
 app.get("/api/edit-site", verifyJWT, routes.getEditSite);
