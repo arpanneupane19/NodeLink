@@ -658,6 +658,7 @@ async function getUserProfile(req, res) {
     res.send({
       message: "User found",
       userData: {
+        username: user.username,
         userFirstName: user.firstName,
         userLastName: user.lastName,
         userBio: user.bio,
