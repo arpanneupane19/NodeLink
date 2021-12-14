@@ -82,12 +82,12 @@ function App() {
           <NotFound />
         </Route>
 
-        <Route exact path="/:username">
-          <UserProfile />
-        </Route>
-
         <Route exact path="/403-forbidden">
           <Forbidden />
+        </Route>
+
+        <Route exact path="/:username">
+          <UserProfile />
         </Route>
 
         <Route component={NotFound} />
