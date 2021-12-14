@@ -78,9 +78,9 @@ function Dashboard() {
   return (
     <div className="font-sans antialiased bg-white">
       <LoggedInNavbar />
-      <div className="flex flex-col md:mt-16 mt-12 md:mx-6 mx-4">
-        <div className="flex flex-col md:mx-6 mx-4">
-          <div className="mb-8 flex flex-col md:mx-6 mx-4">
+      <div className="flex flex-col md:mt-16 mt-12 mx-8">
+        <div className="flex flex-col">
+          <div className="mb-8 flex flex-col">
             <h1 className="text-2xl mb-2 tracking-widest">DASHBOARD</h1>
             <div>
               {currentUser !== "undefined" ? (
@@ -100,13 +100,13 @@ function Dashboard() {
               </Link>
             </div>
           </div>
-          <div className="links flex flex-wrap md:mx-4 mx-2">
+          <div className="links flex flex-wrap">
             {typeof links !== "undefined" ? (
               links.length > 0 ? (
                 links.map((link, index) => (
                   <div
                     key={index}
-                    className="link mx-2 md:my-4 my-2 p-6 shadow-xl rounded-xl bg-green-400 text-white"
+                    className="link w-full md:my-4 my-2 p-6 shadow-xl rounded-xl bg-green-400 text-white"
                   >
                     <div className="flex justify-between items-center mb-2">
                       <p>{link.linkName}</p>

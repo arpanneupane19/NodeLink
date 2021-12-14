@@ -29,9 +29,9 @@ function Analytics() {
   return (
     <div className="font-sans antialiased bg-white">
       <LoggedInNavbar />
-      <div className="flex flex-col md:mt-16 mt-12 md:mx-6 mx-4">
-        <div className="flex flex-col md:mx-6 mx-4">
-          <div className="mb-8 flex flex-col md:mx-6 mx-4">
+      <div className="flex flex-col md:mt-16 mt-12 mx-8">
+        <div className="flex flex-col">
+          <div className="mb-8 flex flex-col">
             <h1 className="text-2xl mb-6 tracking-widest">My Analytics</h1>
             <div className="p-8 bg-green-400 rounded-xl shadow-xl text-white tracking-wide">
               <div className="flex">
