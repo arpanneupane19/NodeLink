@@ -6,6 +6,7 @@ function UserPage() {
   const { username } = useParams();
   const [userData, setUserData] = useState([{}]);
   const [doesUserExist, setDoesUserExist] = useState(true);
+  const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
     axios
@@ -22,11 +23,12 @@ function UserPage() {
         if (response.data.message === "User found") {
           setDoesUserExist(true);
           setUserData(response.data.userData);
+          setImgUrl(
+            `/api/get-profile-picture/${response.data.userData.username}`
+          );
         }
       });
   }, [username]);
-
-  const url = `/api/get-profile-picture/${username}`;
 
   if (doesUserExist === false) {
     return <Redirect to="/404-page-not-found" />;
@@ -44,7 +46,12 @@ function UserPage() {
       >
         <div className="flex flex-col justify-center items-center pt-12 mx-6">
           <div className="flex flex-col justify-center items-center mb-12">
-            <img src={url} alt="Profile" className="rounded-full" width="100" />
+            <img
+              src={imgUrl}
+              alt="Profile"
+              className="rounded-full"
+              width="100"
+            />
             <h1 className="md:text-2xl text-xl mt-4 mb-2 tracking-widest">
               {userData.userFirstName} {userData.userLastName}
             </h1>

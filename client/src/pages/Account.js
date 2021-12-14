@@ -12,6 +12,7 @@ function Account() {
   const [bio, setBio] = useState("");
   const [alreadyExists, setAlreadyExists] = useState(false);
   const [accountUpdated, setAccountUpdated] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
     axios
@@ -43,6 +44,7 @@ function Account() {
           if (response.data.bio.trim() !== "") {
             setBio(response.data.bio);
           }
+          setImgUrl(`/api/get-profile-picture/${response.data.username}`);
         }
       });
   }, []);
@@ -95,8 +97,6 @@ function Account() {
       });
   };
 
-  const url = `/api/get-profile-picture/${username}`;
-
   return (
     <div className="font-sans antialiased bg-white">
       <LoggedInNavbar />
@@ -105,7 +105,7 @@ function Account() {
           <div className="tracking-wider mb-6">
             <h1 className="text-2xl tracking-widest mb-2">My Account</h1>
             <img
-              src={url}
+              src={imgUrl}
               alt="Profile"
               className="rounded-full mt-4"
               width="100"
