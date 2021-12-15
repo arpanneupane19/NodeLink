@@ -60,7 +60,7 @@ function Register() {
   return (
     <div className="font-sans antialiased bg-white">
       <Navbar />
-      <div className="flex flex-col justify-center items-center md:mt-16 mt-12 mx-6">
+      <div className="flex flex-col justify-center items-center md:pt-36 pt-24 mx-6">
         <div className="form w-full md:w-1/2">
           <div className="tracking-wider mb-10">
             {alreadyExists ? (

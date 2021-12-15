@@ -18,7 +18,7 @@ function Home() {
   return (
     <div className="font-sans antialiased bg-white">
       <Navbar />
-      <div className="flex flex-col justify-center items-center md:mt-24 mt-12">
+      <div className="flex flex-col justify-center items-center md:pt-36 pt-24">
         <div className="text-center tracking-widest mb-12">
           <h1 className="md:text-4xl text-2xl mb-2">
             One Link That Does It All

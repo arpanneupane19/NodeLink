@@ -71,7 +71,7 @@ function ChangePassword() {
   return (
     <div className="font-sans antialiased bg-white">
       <LoggedInNavbar />
-      <div className="flex flex-col justify-center items-center md:mt-16 mt-12 mx-6">
+      <div className="flex flex-col justify-center items-center md:pt-36 pt-24 mx-6">
         <div className="form md:w-3/4 w-full">
           <div className="tracking-wider mb-10">
             <h1 className="text-2xl tracking-widest mb-2">Change Password</h1>
