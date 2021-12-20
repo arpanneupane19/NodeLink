@@ -18,7 +18,6 @@ const Link = db.define("Link", {
     required: true,
     allowNull: false,
   },
-  tableName: "Link",
 });
 
 module.exports = Link;

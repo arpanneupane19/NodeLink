@@ -88,8 +88,6 @@ const User = db.define("User", {
   created_at: {
     type: DataTypes.DATE,
   },
-
-  tableName: "Users",
 });
 
 module.exports = User;
