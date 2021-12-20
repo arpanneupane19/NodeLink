@@ -77,7 +77,7 @@ app.get("/api/:username", routes.getUserProfile);
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 db.sync({ alter: true }).then(() => {
   app.listen(PORT, () => {
