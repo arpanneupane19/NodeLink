@@ -1,0 +1,21 @@
+{
+  "name": "nodelink",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpanneupane19/NodeLink-v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arpanneupane19/NodeLink-v2/issues"
+  },
+  "homepage": "https://github.com/arpanneupane19/NodeLink-v2#readme"
+}
