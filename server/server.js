@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const session = require("express-session");
+const sslRedirect = require("heroku-ssl-redirect");
 if (process.env.MODE === "DEVELOPMENT") {
   const cors = require("cors");
 }
@@ -42,6 +43,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(sslRedirect());
 if (process.env.MODE === "DEVELOPMENT") {
   app.use(
     cors({
