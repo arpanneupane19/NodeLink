@@ -108,8 +108,10 @@ function Dashboard() {
                     key={index}
                     className="link w-full md:my-4 my-2 p-6 shadow-xl rounded-xl bg-green-400 text-white"
                   >
-                    <div className="flex justify-between items-center mb-2">
-                      <p>{link.linkName}</p>
+                    <div className="flex justify-between items-center">
+                      <a href={link.linkURL} target="__blank">
+                        {link.linkName}
+                      </a>
                       <div className="flex justify-center items-center">
                         <Link
                           className="mx-2"
@@ -122,9 +124,6 @@ function Dashboard() {
                         </button>
                       </div>
                     </div>
-                    <a href={link.linkURL} target="__blank">
-                      {link.linkURL}
-                    </a>
                   </div>
                 ))
               ) : (
