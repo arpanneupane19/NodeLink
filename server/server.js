@@ -4,6 +4,12 @@ const session = require("express-session");
 const sslRedirect = require("heroku-ssl-redirect").default;
 if (process.env.MODE === "DEVELOPMENT") {
   const cors = require("cors");
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"],
+    })
+  );
 }
 const dotenv = require("dotenv");
 dotenv.config();
@@ -44,14 +50,6 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(sslRedirect());
-if (process.env.MODE === "DEVELOPMENT") {
-  app.use(
-    cors({
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST"],
-    })
-  );
-}
 
 const { verifyJWT } = require("./middlewares/middlewares.js");
 
