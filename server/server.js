@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
 const session = require("express-session");
-const cors = require("cors");
+if (process.env.MODE === "DEVELOPMENT") {
+  const cors = require("cors");
+}
 const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
@@ -40,12 +42,14 @@ app.use(
 );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  })
-);
+if (process.env.MODE === "DEVELOPMENT") {
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"],
+    })
+  );
+}
 
 const { verifyJWT } = require("./middlewares/middlewares.js");
 
