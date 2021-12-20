@@ -1,0 +1,20 @@
+{
+  "name": "nodelink",
+  "version": "1.0.0",
+  "description": "NodeLink is an app that allows people to connect to their audiences with only one link.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpanneupane19/NodeLink-v2.git"
+  },
+  "author": "Arpan Neupane",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arpanneupane19/NodeLink-v2/issues"
+  },
+  "homepage": "https://github.com/arpanneupane19/NodeLink-v2#readme"
+}
