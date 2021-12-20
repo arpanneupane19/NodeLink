@@ -52,7 +52,7 @@ function Home() {
             className="mb-10"
           />
           <div className="border border-green-400 md:p-4 p-3 sm:text-base text-sm rounded-3xl text-center">
-            nodelink.herokuapp.com/
+            nodelinkapp.herokuapp.com/
             <span className="text-gray-600">yourNameHere</span>
           </div>
         </div>
