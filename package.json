@@ -1,8 +1,7 @@
 {
   "name": "nodelink",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "NodeLink is a web app that allows people to connect with their audiences using only one link.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && npm start",
