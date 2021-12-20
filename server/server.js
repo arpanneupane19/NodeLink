@@ -4,6 +4,7 @@ const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+const path = require("path");
 
 // Database
 const db = require("./config/database.js");
@@ -49,7 +50,7 @@ app.use(
 const { verifyJWT } = require("./middlewares/middlewares.js");
 
 const routes = require("./routes/routes.js");
-
+app.use(express.static(path.join(__dirname, "../client/build")));
 app.post("/api/register", routes.postRegister);
 app.post("/api/login", routes.postLogin);
 app.get("/api/logout", routes.logout);
@@ -73,10 +74,12 @@ app.post("/api/forgot-password", routes.postForgotPassword);
 app.get("/api/reset-password/:token", routes.getResetPassword);
 app.post("/api/reset-password/:token", routes.postResetPassword);
 app.get("/api/:username", routes.getUserProfile);
-
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 const PORT = process.env.PORT;
 
-db.sync({ alter: true }).then(() => {
+db.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
   });
