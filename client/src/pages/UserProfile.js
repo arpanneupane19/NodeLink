@@ -13,6 +13,7 @@ function UserPage() {
       .get(`/api/${username}`, {
         headers: {
           "x-access-token": localStorage.getItem("token"),
+          "real-request": true,
         },
       })
       .then((response) => {
