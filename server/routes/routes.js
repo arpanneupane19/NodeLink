@@ -628,8 +628,6 @@ async function getUserProfile(req, res) {
   const user = await User.findOne({ where: { username: username } });
   const token = req.headers["x-access-token"];
   const realRequest = req.headers["real-request"];
-  const hostname = req.hostname;
-  console.log(hostname);
   if (user) {
     const links = await Link.findAll({ where: { linkOwnerId: user.id } });
     if (token !== "null") {
@@ -657,33 +655,25 @@ async function getUserProfile(req, res) {
       views++;
       await user.update({ views: views });
     }
-
-    if (
-      process.env.MODE === "PRODUCTION" &&
-      hostname !== "nodelinkapp.herokuapp.com"
-    ) {
-      res.json({ message: "Something went wrong." });
+    if (realRequest) {
+      res.send({
+        message: "User found",
+        userData: {
+          username: user.username,
+          userFirstName: user.firstName,
+          userLastName: user.lastName,
+          userBio: user.bio,
+          userLinks: links,
+          bgColor: user.bgColor,
+          linkBgColor: user.linkBgColor,
+          linkColor: user.linkColor,
+          textColor: user.textColor,
+        },
+      });
     } else {
-      if (realRequest) {
-        res.send({
-          message: "User found",
-          userData: {
-            username: user.username,
-            userFirstName: user.firstName,
-            userLastName: user.lastName,
-            userBio: user.bio,
-            userLinks: links,
-            bgColor: user.bgColor,
-            linkBgColor: user.linkBgColor,
-            linkColor: user.linkColor,
-            textColor: user.textColor,
-          },
-        });
-      } else {
-        res.send({
-          message: "Something went wrong.",
-        });
-      }
+      res.send({
+        message: "Something went wrong.",
+      });
     }
   }
   if (!user) {
