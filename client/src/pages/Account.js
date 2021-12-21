@@ -107,7 +107,7 @@ function Account() {
             <img
               src={imgUrl}
               alt="Profile"
-              className="rounded-full mt-4"
+              className="rounded-full mt-4 mb-4"
               width="100"
             />
             {alreadyExists ? (
