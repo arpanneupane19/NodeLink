@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
-function ForgotPassword() {
+function ResetPassword() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -114,4 +114,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;
