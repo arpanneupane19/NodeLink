@@ -77,7 +77,6 @@ async function postLogin(req, res) {
           res.json({
             message: "Verification successful",
             token: token,
-            user: user,
           });
         }
       );
