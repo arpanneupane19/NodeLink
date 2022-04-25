@@ -25,7 +25,7 @@ function Menu(props) {
             Login
           </Link>
           <Link
-            to="/login"
+            to="/register"
             className="mb-2 bg-green-400 p-2 rounded-xl text-white hover:bg-green-600"
           >
             Register
